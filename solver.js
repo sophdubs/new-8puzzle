@@ -20,7 +20,6 @@ function generateBoard(n) {
     return [board, [n-1,n-1]];
 }
 
-//NEED TO PASS IN BLANK TILE TO WORK WITH HHYPOTHETICAL SWAPSSSSSSSSSSS*************************************
 //Finds all neighbors of the blank tile and returns an array of their indices
 function findBlankNeighbors(board, blank) {
     let neighbors = [];
@@ -50,8 +49,6 @@ function findBlankNeighbors(board, blank) {
 //Swaps a given tile with the blank tile
 //Updates the board
 //Updates coordinates of the blank tile
-
-//******************************************************NEED TO PASS IN BLANK TILE TO CALC MAN DISTANCE ***************************/
 //Calculates the sum of the heuristic scores of all the tiles on the board
 function calculateH(board, blank) {
     let totalH = 0;
@@ -122,7 +119,7 @@ function solvePuzzle(gameBoard) {
     open[startState.currentState] = true;
     i = 0;
     
-    while (i < 5 ) {
+    while (openSet.length !== 0) {
         // Dequeue the state with lowest fScore
         // Add its state to the visited set and remove it from the open set
         let curr = openSet.dequeue();
@@ -134,7 +131,16 @@ function solvePuzzle(gameBoard) {
             return 'SOLVED';
         } else {
             console.log('hypswap');
-            processNeighbors(curr);
+            let neighborStates = processNeighbors(curr);
+            let validStates = neighborStates.filter(neighborState=> !visited[neighborState.currentState] && !open[neighborState.currentState]);
+            validStates.forEach(validState => {
+                open[validState.currentState] = true;
+                openSet.enqueue(validState);
+            });
+
+            console.log(open);
+            console.log(openSet);
+            
         }
         i++;
     }
@@ -190,7 +196,8 @@ function processNeighbors(curr) {
 
         neighborStates.push(newState);
     }  
-    console.log(neighborStates);
+    return neighborStates;
+   
 }
 
 //Checks if current board state is solved
@@ -209,76 +216,8 @@ function isSolved(arr) {
 
 
 
-//Kicks off the solve algo by initializing the starting node and passing it into the aStarSolver func
-// function solve(board) {
-//     let gScore = 0;
-//     let hScore = calculateH(board);
-//     let neighbors = findNeighbors(board);
-//     let prev = null;
-//     let state = board.slice();
-    
-//     let startNode = {
-//         gScore,
-//         hScore,
-//         fscore: gScore + hScore,
-//         neighbors,
-//         state,
-//         prev
-//     }
-    
-//     return aStarSolver(startNode);
-// }
 
-// //Solver Logic in here
-// function aStarSolver(startNode) {
-//     let openSet = new PriorityQueue();
-//     openSet.enqueue(startNode);
-//     let closedSet = {};
-//     let openSetStates = {};
-//     openSetStates[startNode.state] = true;
 
-//     while (openSet.items.length != 0) {
-//         console.log('openSet',openSet);
-//         let curr = openSet.dequeue();
-//         console.log('curr', curr);
-//         if (checkIfSolved(curr.state)) {
-//             console.log('SOLVED');
-
-//         }
-//         let neighborNodes = processNeighbors(curr, closedSet, openSetStates);
-//         console.log(neighborNodes);
-//         for (let i=0; i< neighborNodes.length; i++){
-//            openSet.enqueue(neighborNodes[i]);
-//            openSetStates[neighborNodes[i]] = true;
-//         }
-//         console.log('openset after enqueue', openSet);
-//         closedSet[curr.state] = true;
-//     }
-
-// }
-
-// function processNeighbors(curr, closedSet, openSetStates){
-//     let nodes = [];
-//     curr.neighbors.forEach(neighbor => {
-//         state = hypotheticalSwapState(neighbor, curr.state);
-//         gScore = curr.gScore + 1;
-//         hScore = calculateH(state);
-//         neighbs = findNeighbors(state);
-
-//         let node = {
-//             state, 
-//             gScore,
-//             hScore,
-//             fScore: gScore + hScore,
-//             prev: curr,
-//             neighbors: neighbs
-//         }
-//         if (!closedSet[state] && !openSetStates[state]) {
-//             nodes.push(node);
-//         }
-//     })
-//     return nodes;
-// };
 
 
 

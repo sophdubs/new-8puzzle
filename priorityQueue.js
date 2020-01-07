@@ -7,7 +7,7 @@ class PriorityQueue {
     enqueue(item) {
         let contains = false;
         for (let i = 0; i < this.items.length; i++) {
-            if (this.items[i].fScore <= item.fScore) {
+            if (this.items[i].gScore + this.items[i].hScore <= item.gScore + item.hScore) {
                 this.items.splice(i, 0, item);
                 contains = true;
                 break;

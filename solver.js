@@ -87,7 +87,7 @@ function shuffle(board, difficulty) {
     while (hScore < difficulty) {
         let neighbors = findBlankNeighbors(gameBoard, blankTile);
         let randomIndex = Math.floor(Math.random() * Math.floor(neighbors.length));
-        swap(neighbors[randomIndex], gameBoard, blankTile, true);
+        swap(neighbors[randomIndex], true);
         hScore = calculateH(gameBoard, blankTile);
     }
 };
@@ -128,25 +128,23 @@ function solvePuzzle(gameBoard) {
         
         //Check if current state is the solved state
         if (isSolved(curr.currentState)) {
-            return 'SOLVED';
+            let path = reconstructPath(curr);
+            return makeMoves(path);
+
         } else {
-            console.log('hypswap');
             let neighborStates = processNeighbors(curr);
             let validStates = neighborStates.filter(neighborState=> !visited[neighborState.currentState] && !open[neighborState.currentState]);
             validStates.forEach(validState => {
                 open[validState.currentState] = true;
                 openSet.enqueue(validState);
             });
-
-            console.log(open);
-            console.log(openSet);
-            
         }
         i++;
     }
 }
 
 function swap(tile, ignoreGScore=false) {
+    console.log('swapping');
     let tempText = gameBoard[tile[0]][tile[1]];
     let tempIndex = tile;
     let blankText = gameBoard[blankTile[0]][blankTile[1]];
@@ -210,6 +208,22 @@ function isSolved(arr) {
         }
     }
     return true;
+}
+
+function reconstructPath(current){
+    let path = [];
+    while(current.prev !== null) {
+        path.push(current.blank);
+        current = current.prev;
+    }
+    return path.reverse();
+}
+
+function makeMoves(path) {
+    for (let i = 0; i < path.length; i++) {
+        swap(path[i]);
+    }
+    return 'SOLVED';
 }
 
 

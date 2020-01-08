@@ -1,0 +1,464 @@
+/* MAIN PAGE STYLING */
+:root {
+    --numRows: null;
+}
+
+body {
+    background: #edb531;
+}
+
+#page {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-auto-rows: minmax(100px, auto);
+    max-width: 1200px;
+    margin: 0 auto;
+    grid-template-areas: 
+    'header header header'
+    'left1 puzzle right1'
+    'left2 puzzle right2'
+    'left3 puzzle right3'
+    'footer footer footer'
+    'bottom bottom bottom'
+    'bottom bottom bottom'
+    'ps ps ps';       
+    grid-gap: 10px;
+    align-items: center;
+    justify-items: center;
+    padding-left: 50px;
+    padding-right: 50px; 
+}
+
+.borders {
+    border-left: 11px dashed #000000;
+    border-right: 11px dashed #000000;
+}
+
+.container {
+    margin: 2rem;
+    display: grid;
+    grid-template-columns: repeat(var(--numRows), auto);
+    grid-template-rows: repeat(var(--numRows), auto);
+    grid-gap: 5px; 
+    grid-area: puzzle;
+    border: 11px dashed white; 
+}
+
+.leaderboards {
+    width: 90%;
+    padding-top: 50px;
+    display: grid;
+    margin: 0 auto;
+    grid-auto-rows: minmax(100px, auto);
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: "easy medium hard";
+    grid-area: bottom;
+    grid-gap: 75px;
+}
+
+/* Generate all the tile and background stuff using JS */
+.tile {
+    background: url(dog.jpeg) no-repeat;
+    height: 166px;
+    width: 166px;
+    background-clip: content-box;
+}
+
+#one {
+    background-position: 0px 0px;
+    grid-area: 'one';
+    z-index: 1;
+}
+
+#two {
+    background-position: -166px 0px;
+    grid-area: 'two';
+    z-index: 1;
+}
+
+#three {
+    background-position: -332px 0px;
+    grid-area: 'three';
+    z-index: 1;
+}
+
+#four {
+    background-position: 0px -166px;
+    grid-area: 'four';
+    z-index: 1;
+}
+
+#five {
+    background-position: -166px -166px;
+    grid-area: 'five';
+    z-index: 1;
+}
+
+#six {
+    background-position: -332px -166px;
+    grid-area: 'six';
+    z-index: 1;
+}
+
+#seven {
+    background-position: 0px -332px;
+    grid-area: 'seven';
+    z-index: 1;
+}
+
+#eight {
+    background-position: -166px -332px;
+    grid-area: 'eight';
+    z-index: 1;
+}
+
+#nine {
+    background: white;
+    grid-area: 'nine';
+    z-index: 0;
+} 
+
+.paused {
+    filter: blur(60px);
+}
+
+.title{
+    grid-area: header;
+    text-align: center;
+    font-size: 80px;
+    font-weight: bold;
+    font-family: Marker Felt, fantasy;
+    margin-top: 10px;
+    margin-bottom: 0; 
+}
+
+.difficulty {
+    font-size: 45px;
+    font-weight: bold;
+    font-family: Marker Felt, fantasy;
+    width:75%;
+}
+
+.start-easy{
+    grid-area: left1;
+}
+
+.start-medium{
+    grid-area: left2;
+}
+
+.start-hard{
+    grid-area: left3;
+}
+
+.move-count {
+    grid-area: right1;
+    text-align: center;
+}
+
+.move-counter {
+    font-family:American Typewriter, serif;
+    font-weight: bold;  
+    font-size:35px;
+    margin-bottom: 0px;
+}
+
+.moves {
+    font-family:American Typewriter, serif;
+    font-weight: bold;  
+    font-size:15px;
+    margin-top: 0px;
+}
+
+.timer{
+    grid-area: right2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: white;
+    border-radius: 50%;
+    height: 70%;
+    width: 50%;
+    text-align: center;
+    border: 10px solid black;
+}
+
+.timer-text {
+    font-family:American Typewriter, serif;
+    font-weight: bold;  
+    font-size:30px;
+}
+
+.pause-resume {
+    grid-area:right3;
+    font-size: 45px;
+    font-weight: bold;
+    font-family: Marker Felt, fantasy;
+    width:75%;
+}
+
+.lb-header {
+    grid-area: footer;
+    text-align: center;
+    font-family: Marker Felt, fantasy;
+}
+
+.lb-h1 {
+    font-size: 70px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.sort-by-button {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 40px;
+    background: red;
+    border-radius: 33%;
+    color: white;
+
+}
+
+.leaderboard-easy {
+    grid-area: easy;
+    background: hsl(45, 92%, 35%);
+    outline: 11px dashed white;
+
+}
+
+.leaderboard-medium {
+    grid-area: medium;
+    background: hsl(45, 92%, 35%);
+    outline: 11px dashed red;
+}
+
+.leaderboard-hard {
+    grid-area: hard;
+    background: hsl(45, 92%, 35%);
+    outline: 11px dashed white;
+}
+
+.leaderboard  h1{
+    font-family: Marker Felt, fantasy;
+    color: white;
+    font-size: 45px;
+    text-align: center;
+}
+
+.leaderboard ul {
+    list-style-type: none;
+    font-size: 25px;
+    text-align: left;
+    color: white;
+    font-family: Chalkduster, fantasy;
+    padding-right: 40px;
+}
+
+.right {
+    float: right;
+}
+
+.ps-section {
+    grid-area: ps;
+    text-align: center;
+    font-family: Marker Felt, fantasy;
+    color: red;
+}
+
+.button {
+    color: #fff !important;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: #ed3330;
+    padding: 20px;
+    border-radius: 5px;
+    display: inline-block;
+    border: none;
+    transition: all 0.4s ease 0s;
+    height:50%;
+}
+
+.button:hover {
+    background: #434343;
+    letter-spacing: 1px;
+    -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+    -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+    box-shadow: 5px 40px -10px rgba(0,0,0,0.57);
+    transition: all 0.4s ease 0s;
+}
+
+/* MODAL STYLING */
+
+.modal {
+    width: 500px;
+    height: 575px;
+    background: url(dog-modal.jpeg) no-repeat;
+    border: 11px dashed white;
+}
+
+.pug-club {
+    position: relative;
+    top: 50%;
+    left: 5%;
+    color: white;
+    font-family: Marker Felt, fantasy;
+}
+
+.pug-club h2 {
+    font-size: 40px;
+    margin-bottom: 0px;
+}
+
+.pug-club h4 {
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.modal-no-show {
+    display: none;
+}
+
+.modal-show {
+    display: block;
+    position: absolute;
+    top: 24%;
+    left:30%;
+}
+
+.modal-open {
+    filter: blur(90px);
+}
+
+.modal-close {
+    position: absolute;
+    right: 4%;
+    top: 1%;
+    font-family: Marker Felt, fantasy;
+    color: white;
+}
+
+.modal-button {
+    color: black;
+    font-family: Marker Felt, fantasy;
+    font-size: 13px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.modal-input-box {
+    border-radius: 5px;
+}
+
+/* HACKER MODE STYLING */
+
+.hacker-div {
+    display: block;
+    position: absolute;
+    top: 5%;
+    right: 7%;
+}
+
+.hacker-button {
+    background:#edb531;
+    border: none;
+    color: #edb531;
+    border-radius: 5%;
+    width: 200px;
+    height: 75px;
+    font-size: 20px;
+    font-family: Marker Felt, fantasy;
+}
+
+.hacker-button:hover {
+    background: red;
+    color: black;
+}
+
+.hacker-background-color {
+    background: black;
+}
+
+.hacker-title {
+    color:rgb(86, 220, 243);
+}
+
+.hacker-tiles {
+    background: url(hacker-dog.jpeg) no-repeat;
+}
+
+.hacker-border-fuchsia {
+    border-left: 11px dashed fuchsia;
+    border-right: 11px dashed fuchsia;
+}
+
+.hacker-border-green {
+    border: 11px dashed lime;
+}
+
+.hacker-outline-green {
+    outline: 11px dashed lime;
+    background: black;
+}
+
+.hacker-outline-fuchsia {
+    outline: 11px dashed fuchsia;
+    background: black;
+}
+
+.hacker-easy {
+    background:	#ff8547;
+}
+
+.hacker-medium {
+    background:  #FDFF00;
+}
+
+.hacker-hard {
+    background: rgb(236, 69, 97);
+}
+
+.hacker-solve {
+    background: #44D7A8;
+}
+
+.hacker-timer {
+    border: 10px solid #0066FF;
+}
+
+.hacker-count {
+    color: #FDFF00;
+}
+
+.hacker-sort-button {
+    background: #ff8547;
+}
+
+.hacker-ps {
+    color: #44D7A8;
+}
+
+.clicked {
+    background:  #FF69B4;
+    color: black;
+}
+
+.click-here {
+    -webkit-box-shadow: 0px 0px 70px -10px white;
+    -moz-box-shadow: 0px 0px 70px -10px white;
+    box-shadow: 0px 70px -10px white;
+}
+
+.click-here:hover {
+    background: #44D7A8;
+    letter-spacing: 0px;
+    -webkit-box-shadow: 0px 0px 100px -10px white;
+    -moz-box-shadow: 0px 0px 100px -10px white;
+    box-shadow: 0px 100px -10px white;
+}
+
+.hacker-button:focus {
+    outline: none;
+}
+
+
+

@@ -2,24 +2,6 @@ const EASY = 10;
 const MEDIUM = 15;
 const HARD = 20;
 
-//Generate board
-let [gameBoard, blankTile] = generateBoard(3);
-
-//Generates a board of size n^2
-//Generates the board and stores it in Gameboard.
-//Stores the coordinates of the blank tile in blankTile. 
-function generateBoard(n) {
-    let board = [];
-    for (let i = 0; i < n; i++) {
-        let row = [];
-        for (let j = 0; j < n; j++) {
-            row.push(i * n + j);
-        }
-        board.push(row);
-    }
-    return [board, [n-1,n-1]];
-}
-
 //Find Neighbors
 //Finds all neighbors of the blank tile and returns an array of their indices
 function findBlankNeighbors(board, blank) {
@@ -46,8 +28,6 @@ function findBlankNeighbors(board, blank) {
     }
     return neighbors;
 }
-
-
 
 //Shuffle
 //This function will shuffle the board by moving tiles until a certain level of difficulty (hScore) is reached

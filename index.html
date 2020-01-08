@@ -4,11 +4,83 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="styles.css">
     <title>Document</title>
 </head>
 <body>
+    <div id="page" class="borders">
+        <h1 class="title">8-Puggle!</h1>
+        <div id="puzzle-container" class="container">
+            <div id="one" class="tile" data-pos="one"></div>
+            <div id="two" class="tile" data-pos="two"></div>
+            <div id="three" class="tile" data-pos="three"></div>
+            <div id="four" class="tile" data-pos="four"></div>
+            <div id="five" class="tile" data-pos="five"></div>
+            <div id="six" class="tile" data-pos="six"></div>
+            <div id="seven" class="tile" data-pos="seven"></div>
+            <div id="eight" class="tile" data-pos="eight"></div>
+            <div id="nine" class="tile" data-pos="nine"></div>
+        </div>
+        
+        <button class="start-easy button difficulty">Easy</button>
+        <button class="start-medium button difficulty">Medium</button>
+        <button class="start-hard button difficulty">Hard</button>
+            
+                
+        <div class="move-count">
+            <p class="move-counter">0</p>
+            <p class="moves">MOVES</p>
+        </div>
+        <div class="timer">
+            <p class="timer-text">00:00</p>
+        </div>
+        <button class="pause-resume button ">PAUSE</button>
+        
+        <div class="lb-header">
+            <h1 class="lb-h1">Pug-Club Leaderboards</h1>
+            <p class="sort-by-button sbm">sort by moves</p>
+        </div>
+            
+        <div class="leaderboards">
+                    
+            <div class="leaderboard leaderboard-easy">
+                <h1 class='lb-title'>Easy</h1>
+                <ul class="easy-list sort-by-moves"></ul>
+            </div>
+            <div class="leaderboard leaderboard-medium">
+                <h1 class='lb-title'>Medium</h1>
+                <ul class="medium-list sort-by-moves"></ul>
+            </div>
+            <div class="leaderboard leaderboard-hard">
+                <h1 class='lb-title'>Hard</h1>
+                <ul class="hard-list sort-by-moves"></ul>  
+            </div>
+        </div>  
+        <div class="ps-section">
+            <p class="ps-1">psssst! wondering why so many leaders have such low times?</p>
+            <p class="ps2">try looking a little closer.. there might something hidden on the page!</p>
+        </div>      
+    </div>
+    <div class="modal modal-no-show">
+        <p class="modal-close">X</p>
+        <div class="pug-club">
+            <h2>Join The Pug-Club</h2>
+            <h4>enter your name to join the leaderboard</h4>
+            <form action="submit" class="modal-form">
+                <input class="modal-input-box" type="text" name="name">
+                <button class="modal-button">join</button>
+            </form>
+        </div>
+    </div>
+    <div class="hacker-div">
+        <button class="hacker-button">super secret hacker mode</button>
+    </div>
+    <script src="generateBoard.js"></script>
     <script src="priorityQueue.js"></script>
     <script src="solver.js"></script>
     <script src="gameLogic.js"></script>
+    <script src="features.js"></script>
+    <script src="hackerMode.js"></script>
+    <script src="modal.js"></script>
 </body>
 </html>

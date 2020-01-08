@@ -1,54 +1,5 @@
-const EASY = 10;
-const MEDIUM = 15;
-const HARD = 20;
 let gScore = 0;
 
-let [gameBoard, blankTile] = generateBoard(3);
-
-//Generates a board of size n^2
-//Generates the board and stores it in Gameboard.
-//Stores the coordinates of the blank tile in blankTile. 
-function generateBoard(n) {
-    let board = [];
-    for (let i = 0; i < n; i++) {
-        let row = [];
-        for (let j = 0; j < n; j++) {
-            row.push(i * n + j);
-        }
-        board.push(row);
-    }
-    return [board, [n-1,n-1]];
-}
-
-//Finds all neighbors of the blank tile and returns an array of their indices
-function findBlankNeighbors(board, blank) {
-    let neighbors = [];
-    //Above
-    if (blank[0] !== 0) {
-        let coords = [blank[0] - 1, blank[1]];
-        neighbors.push(coords);
-    }
-    //Left
-    if (blank[1] !== 0) {
-        let coords = [blank[0], blank[1] -1];
-        neighbors.push(coords);
-    }
-    //Right
-    if (blank[1] !== board.length -1) {
-        let coords = [blank[0], blank[1] + 1];
-        neighbors.push(coords);
-    }
-    //Below
-    if (blank[0] !== board.length - 1) {
-        let coords = [blank[0] + 1, blank[1]];
-        neighbors.push(coords);
-    }
-    return neighbors;
-}
-
-//Swaps a given tile with the blank tile
-//Updates the board
-//Updates coordinates of the blank tile
 //Calculates the sum of the heuristic scores of all the tiles on the board
 function calculateH(board, blank) {
     let totalH = 0;
@@ -81,17 +32,6 @@ function calculateManhattenDistance(row, column, board, blank) {
     }
 }
 
-//This function will shuffle the board by moving tiles until a certain level of difficulty (hScore) is reached
-function shuffle(board, difficulty) {
-    let hScore = 0;
-    while (hScore < difficulty) {
-        let neighbors = findBlankNeighbors(gameBoard, blankTile);
-        let randomIndex = Math.floor(Math.random() * Math.floor(neighbors.length));
-        swap(neighbors[randomIndex], true);
-        hScore = calculateH(gameBoard, blankTile);
-    }
-};
-
 function solvePuzzle(gameBoard) {
     let hScore = calculateH(gameBoard, blankTile);
     let currentState = JSON.parse(JSON.stringify(gameBoard));
@@ -108,9 +48,7 @@ function solvePuzzle(gameBoard) {
         gScore, 
         blank: blankTile
     }
-    
-    console.log(startState);
-    
+
     let visited = {};
     let open = {};
     
@@ -140,22 +78,6 @@ function solvePuzzle(gameBoard) {
             });
         }
         i++;
-    }
-}
-
-function swap(tile, ignoreGScore=false) {
-    console.log('swapping');
-    let tempText = gameBoard[tile[0]][tile[1]];
-    let tempIndex = tile;
-    let blankText = gameBoard[blankTile[0]][blankTile[1]];
-    let blankIndex = blankTile;
-
-    gameBoard[blankIndex[0]][blankIndex[1]] = tempText;
-    gameBoard[tempIndex[0]][tempIndex[1]] = blankText;
-    blankTile = tempIndex;
-    
-    if (!ignoreGScore) {
-        gScore += 1;
     }
 }
 
@@ -195,7 +117,6 @@ function processNeighbors(curr) {
         neighborStates.push(newState);
     }  
     return neighborStates;
-   
 }
 
 //Checks if current board state is solved
@@ -225,7 +146,6 @@ function makeMoves(path) {
     }
     return 'SOLVED';
 }
-
 
 
 

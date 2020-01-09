@@ -1,6 +1,8 @@
 /* MAIN PAGE STYLING */
 :root {
     --numRows: null;
+    --tileWidth: null;
+    --tileHeight: null;
 }
 
 body {
@@ -59,12 +61,12 @@ body {
 /* Generate all the tile and background stuff using JS */
 .tile {
     background: url(dog.jpeg) no-repeat;
-    height: 166px;
-    width: 166px;
+    height: var(--tileHeight);
+    width: var(--tileWidth);
     background-clip: content-box;
 }
 
-#one {
+/* #one {
     background-position: 0px 0px;
     grid-area: 'one';
     z-index: 1;
@@ -116,7 +118,7 @@ body {
     background: white;
     grid-area: 'nine';
     z-index: 0;
-} 
+}  */
 
 .paused {
     filter: blur(60px);

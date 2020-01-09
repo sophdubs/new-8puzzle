@@ -48,7 +48,7 @@ function swap(tile, ignoreGScore=false) {
     let tempText = gameBoard[tile[0]][tile[1]];
     let tempIndex = tile;
     let blankText = gameBoard[blankTile[0]][blankTile[1]];
-    let blankIndex = blankTile;
+    let blankIndex = JSON.parse(JSON.stringify(blankTile));
 
     gameBoard[blankIndex[0]][blankIndex[1]] = tempText;
     gameBoard[tempIndex[0]][tempIndex[1]] = blankText;
@@ -56,5 +56,20 @@ function swap(tile, ignoreGScore=false) {
     
     if (!ignoreGScore) {
         gScore += 1;
+    }
+
+    updateTilePositions();
+    
+}
+
+function updateTilePositions() {
+    for (let i = 0; i < gameBoard.length; i++) {
+        for (let j = 0; j < gameBoard[0].length; j++) {
+            let tile = document.getElementById(gameBoard[i][j]);
+            let gridArea = String.fromCharCode(i * gameBoard.length + j + 97);
+            if (tile.style.gridArea !== gridArea) {
+                tile.style.gridArea = gridArea;
+            }
+        }
     }
 }

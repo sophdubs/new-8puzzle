@@ -1,6 +1,6 @@
+//Static values we will need to generate the board.
 const WIDTH = 498;
 const HEIGHT = 498;
-
 let layouts = {
     1:'"a"',
     2:'"a" "b"',
@@ -48,16 +48,20 @@ function createTiles(board) {
             newTile.dataset.pos = pos;
             newTile.classList.add('tile');
             newTile.style.backgroundPosition = `${-j * Math.floor(WIDTH/board.length)}px ${-i * Math.floor(HEIGHT/board[0].length)}px`;
-            (i === board.length -1 && j === board[0].length - 1) ? newTile.style.zIndex = 0 : newTile.style.zIndex = 1;
             newTile.style.gridArea = String.fromCharCode(pos + 97);
+            newTile.style.zIndex = 1;
+            if (i === board.length - 1 && j === board[0].length - 1) {
+                console.log('blank tile should be white tbh');
+                newTile.style.zIndex = 0;
+                newTile.style.background = 'white';
+            }
             
             parent.append(newTile);   
         }
-    }
-   
+    } 
 }
 
-let tiles = document.querySelectorAll('.tile');
+
 
 
 

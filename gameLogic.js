@@ -57,9 +57,7 @@ function swap(tile, ignoreGScore=false) {
     if (!ignoreGScore) {
         gScore += 1;
     }
-
     updateTilePositions();
-    
 }
 
 function updateTilePositions() {
@@ -67,9 +65,46 @@ function updateTilePositions() {
         for (let j = 0; j < gameBoard[0].length; j++) {
             let tile = document.getElementById(gameBoard[i][j]);
             let gridArea = String.fromCharCode(i * gameBoard.length + j + 97);
+            let pos = i * gameBoard.length + j;
             if (tile.style.gridArea !== gridArea) {
                 tile.style.gridArea = gridArea;
+                tile.dataset.pos = pos;
             }
         }
     }
 }
+
+//All the event listeners that make the game work
+let startEasyButton = document.querySelector('.start-easy');
+let startMediumButton = document.querySelector('.start-medium');
+let startHardButton = document.querySelector('.start-hard');
+let tiles = document.querySelectorAll('.tile');
+
+startEasyButton.addEventListener('click', () => {
+    handleStartGame(EASY);
+});
+startMediumButton.addEventListener('click', () => {
+    handleStartGame(MEDIUM);
+});
+startHardButton.addEventListener('click', () => {
+    handleStartGame(HARD);
+});
+
+tiles.forEach(tile => {
+    tile.addEventListener('click', handleTileClick);
+});
+
+function handleStartGame(difficulty) {
+    shuffle(gameBoard, difficulty);
+}
+
+function handleTileClick() {
+    let coords = [Math.floor(this.dataset.pos / gameBoard.length), this.dataset.pos % gameBoard.length];
+    let blankTileNeighbors = findBlankNeighbors(gameBoard, blankTile);
+    blankTileNeighbors.forEach(neighbor => {
+        if (neighbor[0] === coords[0] && neighbor[1] === coords[1]) {
+            swap(coords);
+        }
+    })
+}
+

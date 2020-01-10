@@ -102,6 +102,11 @@ function sortByTime(arr) {
     return sorted;
 }
 
+function htmlToCount(html) {
+    let time = html.match(/(\d\d):(\d\d)/);
+    let count = parseInt(time[1]) * 60 + parseInt(time[2]);
+    return count;
+}
 
 
 function toggleSort() {

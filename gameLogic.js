@@ -5,6 +5,7 @@ let started = false;
 let gameBoard;
 let blankTile;
 let hackerMode = false;
+let difficult = null;
 
 const grid = document.querySelector('.container');
 const { forceGridAnimation } = animateCSSGrid.wrapGrid(grid);
@@ -14,6 +15,7 @@ function resetGame(n){
     if (t){clearInterval(t)};
     timerText.innerHTML='00:00';
     gScore = 0;
+    difficulty = null;
     updateMoveCounter();
     started = false;
     [gameBoard, blankTile] = generateBoard(n);
@@ -109,16 +111,19 @@ let startHardButton = document.querySelector('.start-hard');
 
 startEasyButton.addEventListener('click', () => {
     if (!started) {
+        difficulty = 'easy';
         handleStartGame(EASY);
     }
 });
 startMediumButton.addEventListener('click', () => {
     if (!started) {
+        difficulty = 'medium'
         handleStartGame(MEDIUM);
     }
 });
 startHardButton.addEventListener('click', () => {
     if (!started) {
+        difficulty = 'hard';
         handleStartGame(HARD);
     }
 });

@@ -19,3 +19,24 @@ function closeModal() {
     modal.classList.remove('modal-show');
     page.classList.remove('modal-open');
 }
+
+const modalForm = document.querySelector('.modal-form');
+modalForm.addEventListener('submit', handleModalSubmit);
+
+function handleModalSubmit(e) {
+    e.preventDefault();
+    let name = e.target.name.value;
+    let time = timerText.innerHTML;
+    let moves = moveCounter.innerHTML;
+
+    db.collection(difficulty).add({
+        name: name,
+        moves: moves,
+        time: time
+    })
+    .then(() => {
+        fetchLeaderboard(difficulty);
+        closeModal()
+    });
+}
+

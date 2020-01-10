@@ -6,6 +6,9 @@ let gameBoard;
 let blankTile;
 let hackerMode = false;
 
+const grid = document.querySelector('.container');
+const { forceGridAnimation } = animateCSSGrid.wrapGrid(grid);
+
 function resetGame(n){
     document.querySelector('.container').innerHTML = '';
     if (t){clearInterval(t)};
@@ -91,6 +94,7 @@ function updateTilePositions() {
             if (tile.style.gridArea !== gridArea) {
                 tile.style.gridArea = gridArea;
                 tile.dataset.pos = pos;
+                forceGridAnimation();
             }
         }
     }

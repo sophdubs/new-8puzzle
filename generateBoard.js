@@ -9,11 +9,6 @@ let layouts = {
     5:'"a b c d e" "f g h i j" "1k l m n o" "p q r s t" "u v w x y"'
 }
 
-// '"0 1 2" "3 4 5" "6 7 8"',
-//Generate board
-let [gameBoard, blankTile] = generateBoard(3);
-adjustStyles(3);
-createTiles(gameBoard);
 
 //Generates a board of size n^2
 //Generates the board and stores it in Gameboard.
@@ -51,7 +46,6 @@ function createTiles(board) {
             newTile.style.gridArea = String.fromCharCode(pos + 97);
             newTile.style.zIndex = 1;
             if (i === board.length - 1 && j === board[0].length - 1) {
-                console.log('blank tile should be white tbh');
                 newTile.style.zIndex = 0;
                 newTile.style.background = 'white';
             }

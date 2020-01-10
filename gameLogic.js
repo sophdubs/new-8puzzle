@@ -1,6 +1,20 @@
-const EASY = 10;
+const EASY = 2;
 const MEDIUM = 15;
 const HARD = 20;
+let started = false;
+let gameBoard;
+let blankTile;
+
+function resetGame(n){
+    timerText.innerHTML='00:00';
+    gScore = 0;
+    started = false;
+    [gameBoard, blankTile] = generateBoard(n);
+    adjustStyles(n);
+    createTiles(gameBoard);
+    updateTilePositions();
+}
+resetGame(3);
 
 //Find Neighbors
 //Finds all neighbors of the blank tile and returns an array of their indices
@@ -58,6 +72,10 @@ function swap(tile, ignoreGScore=false) {
         gScore += 1;
     }
     updateTilePositions();
+    updateMoveCounter();
+    if (isSolved(gameBoard)) {
+        puzzleIsSolved();
+    }
 }
 
 function updateTilePositions() {
@@ -79,6 +97,7 @@ let startEasyButton = document.querySelector('.start-easy');
 let startMediumButton = document.querySelector('.start-medium');
 let startHardButton = document.querySelector('.start-hard');
 let tiles = document.querySelectorAll('.tile');
+console.log(tiles);
 
 startEasyButton.addEventListener('click', () => {
     handleStartGame(EASY);
@@ -95,16 +114,26 @@ tiles.forEach(tile => {
 });
 
 function handleStartGame(difficulty) {
+    started = true;
+    timer(Date.now());
     shuffle(gameBoard, difficulty);
 }
 
 function handleTileClick() {
-    let coords = [Math.floor(this.dataset.pos / gameBoard.length), this.dataset.pos % gameBoard.length];
-    let blankTileNeighbors = findBlankNeighbors(gameBoard, blankTile);
-    blankTileNeighbors.forEach(neighbor => {
-        if (neighbor[0] === coords[0] && neighbor[1] === coords[1]) {
-            swap(coords);
-        }
-    })
+    console.log(started);
+    if (started){
+        let coords = [Math.floor(this.dataset.pos / gameBoard.length), this.dataset.pos % gameBoard.length];
+        let blankTileNeighbors = findBlankNeighbors(gameBoard, blankTile);
+        blankTileNeighbors.forEach(neighbor => {
+            if (neighbor[0] === coords[0] && neighbor[1] === coords[1]) {
+                swap(coords);
+            }
+        });
+    }
+}
+
+function puzzleIsSolved() {
+   //PAUSE TIMER
+   //POP UP MODAL
 }
 

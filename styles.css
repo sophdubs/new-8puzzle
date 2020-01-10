@@ -43,7 +43,8 @@ body {
     grid-template-rows: repeat(var(--numRows), auto);
     grid-gap: 5px; 
     grid-area: puzzle;
-    border: 11px dashed white; 
+    outline: 11px dashed white; 
+    background: white;
 }
 
 .leaderboards {

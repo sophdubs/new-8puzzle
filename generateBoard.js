@@ -53,6 +53,7 @@ function createTiles(board) {
             parent.append(newTile);   
         }
     } 
+    addEventListeners();
 }
 
 

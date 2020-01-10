@@ -26,14 +26,17 @@ let puzzleContainer = document.querySelector('.container');
 pauseResume.addEventListener('click', handlePauseResume);
 
 function handlePauseResume() {
-    if (pauseResume.innerHTML === 'PAUSE') {
+    if (hackerMode){
+        solvePuzzle(gameBoard);
+    }else if (pauseResume.innerHTML === 'PAUSE') {
         timer(Date.now(), true);
         pauseResume.innerHTML = 'RESUME';
+        puzzleContainer.classList.toggle('paused');
     } else {
         pauseResume.innerHTML = 'PAUSE';
         timer(Date.now());
+        puzzleContainer.classList.toggle('paused');
     }
-    puzzleContainer.classList.toggle('paused');
 }
 
 //moves counter
@@ -43,6 +46,7 @@ function updateMoveCounter() {
 }
 
 //leaderboards
+let sortButton = document.querySelector('.sort-by-button');
 
 
 

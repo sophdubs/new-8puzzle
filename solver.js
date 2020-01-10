@@ -142,7 +142,9 @@ function reconstructPath(current){
 
 function makeMoves(path) {
     for (let i = 0; i < path.length; i++) {
-        swap(path[i]);
+        setTimeout(() =>{
+            swap(path[i])
+        }, i * 250);
     }
     return 'SOLVED';
 }

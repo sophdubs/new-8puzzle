@@ -1,13 +1,17 @@
-const EASY = 2;
-const MEDIUM = 15;
-const HARD = 20;
+const EASY = 5;
+const MEDIUM = 10;
+const HARD = 15;
 let started = false;
 let gameBoard;
 let blankTile;
+let hackerMode = false;
 
 function resetGame(n){
+    document.querySelector('.container').innerHTML = '';
+    if (t){clearInterval(t)};
     timerText.innerHTML='00:00';
     gScore = 0;
+    updateMoveCounter();
     started = false;
     [gameBoard, blankTile] = generateBoard(n);
     adjustStyles(n);
@@ -73,7 +77,7 @@ function swap(tile, ignoreGScore=false) {
     }
     updateTilePositions();
     updateMoveCounter();
-    if (isSolved(gameBoard)) {
+    if (isSolved(gameBoard) && started && !ignoreGScore) {
         puzzleIsSolved();
     }
 }
@@ -96,31 +100,42 @@ function updateTilePositions() {
 let startEasyButton = document.querySelector('.start-easy');
 let startMediumButton = document.querySelector('.start-medium');
 let startHardButton = document.querySelector('.start-hard');
-let tiles = document.querySelectorAll('.tile');
-console.log(tiles);
+
+
 
 startEasyButton.addEventListener('click', () => {
-    handleStartGame(EASY);
+    if (!started) {
+        handleStartGame(EASY);
+    }
 });
 startMediumButton.addEventListener('click', () => {
-    handleStartGame(MEDIUM);
+    if (!started) {
+        handleStartGame(MEDIUM);
+    }
 });
 startHardButton.addEventListener('click', () => {
-    handleStartGame(HARD);
+    if (!started) {
+        handleStartGame(HARD);
+    }
 });
 
-tiles.forEach(tile => {
-    tile.addEventListener('click', handleTileClick);
-});
+function addEventListeners(){
+    let tiles = document.querySelectorAll('.tile');
+    tiles.forEach(tile => {
+        tile.addEventListener('click', handleTileClick);
+    });
+}
 
 function handleStartGame(difficulty) {
+    if (hackerMode) {
+        clickHereButton();
+    }
     started = true;
     timer(Date.now());
     shuffle(gameBoard, difficulty);
 }
 
 function handleTileClick() {
-    console.log(started);
     if (started){
         let coords = [Math.floor(this.dataset.pos / gameBoard.length), this.dataset.pos % gameBoard.length];
         let blankTileNeighbors = findBlankNeighbors(gameBoard, blankTile);
@@ -133,7 +148,7 @@ function handleTileClick() {
 }
 
 function puzzleIsSolved() {
-   //PAUSE TIMER
-   //POP UP MODAL
+    timer(Date.now(), true);
+    setTimeout(showModal, 500);
 }
 

@@ -1,9 +1,6 @@
 //Hacker mode 
-
 const hackerButton = document.querySelector('.hacker-button');
 hackerButton.addEventListener('click', activateHackerMode);
-
-
 
 let title = document.querySelector('.title');
 let movesDiv = document.querySelector('.move-count');
@@ -15,7 +12,6 @@ let leaderboardTitle = document.querySelector('.lb-h1');
 let psSection = document.querySelector('.ps-section');
 let bod = document.querySelector('body');
 let tiles = document.querySelectorAll('.tile');
-
 
 function activateHackerMode() {
     resetGame(3);
@@ -81,7 +77,7 @@ function hackerTiles(active) {
 function hackerBorders(active) {
     if (active) {
         page.classList.add('hacker-border-fuchsia');
-        puzzleContainer.classList.add('hacker-border-green');
+        puzzleContainer.classList.add('hacker-outline-green');
         leaderboardEasy.classList.add('hacker-outline-green');
         leaderboardMedium.classList.add('hacker-outline-fuchsia');
         leaderboardHard.classList.add('hacker-outline-green');
